@@ -26,59 +26,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Общие функции (закрытие/открытие окна)
-    function openModal(popup) {
-        popup.classList.add('popup_is-opened');
-    }
+    // function openModal(popup) {
+    //     popup.classList.add('popup_is-opened');
+    // }
 
-    function closeModal(popup) {
-        popup.classList.remove('popup_is-opened');
+    // function closeModal(popup) {
+    //     popup.classList.remove('popup_is-opened');
 
-    }
+    // }
 
     // Функция для создания карточки
-    function createCard(cardData) {
-        console.log("Создаем карточку для:", cardData);
+    // function createCard(cardData) {
+    //     console.log("Создаем карточку для:", cardData);
         
-        // Получаем шаблон
-        const cardTemplate = document.getElementById('card-template').content;
-        // Клонируем содержимое шаблона
-        const cardElement = cardTemplate.cloneNode(true);
+    //     // Получаем шаблон
+    //     const cardTemplate = document.getElementById('card-template').content;
+    //     // Клонируем содержимое шаблона
+    //     const cardElement = cardTemplate.cloneNode(true);
         
-        // Находим элементы карточки
-        const cardImage = cardElement.querySelector('.card__image');
-        const cardTitle = cardElement.querySelector('.card__title');
-        const likeButton = cardElement.querySelector('.card__like-button');
-        const deleteButton = cardElement.querySelector('.card__delete-button');
+    //     // Находим элементы карточки
+    //     const cardImage = cardElement.querySelector('.card__image');
+    //     const cardTitle = cardElement.querySelector('.card__title');
+    //     const likeButton = cardElement.querySelector('.card__like-button');
+    //     const deleteButton = cardElement.querySelector('.card__delete-button');
 
-        // Заполняем карточку данными
-        cardImage.src = cardData.link;
-        cardImage.alt = cardData.name;
-        cardTitle.textContent = cardData.name;
+    //     // Заполняем карточку данными
+    //     cardImage.src = cardData.link;
+    //     cardImage.alt = cardData.name;
+    //     cardTitle.textContent = cardData.name;
 
-        // Настраиваем кнопку лайка
-        likeButton.addEventListener('click', function() {
-            likeButton.classList.toggle('card__like-button_is-active'); 
-        });
+    //     // Настраиваем кнопку лайка
+    //     likeButton.addEventListener('click', function() {
+    //         likeButton.classList.toggle('card__like-button_is-active'); 
+    //     });
 
-        // Настраиваем кнопку удаления
-        deleteButton.addEventListener('click', function() {
-            const card = deleteButton.closest('.card'); 
-            card.remove(); 
-        });
+    //     // Настраиваем кнопку удаления
+    //     deleteButton.addEventListener('click', function() {
+    //         const card = deleteButton.closest('.card'); 
+    //         card.remove(); 
+    //     });
 
-        // Добавляем обработчик для открытия поп-апа с изображением
-        cardImage.addEventListener('click', function() {
-            imagePopupImage.src = cardData.link; 
-            imagePopupImage.alt = cardData.name; 
-            imagePopupTitle.textContent = cardData.name; 
-            openModal(imagePopup); // Открываем поп-ап
-        });
+    //     // Добавляем обработчик для открытия поп-апа с изображением
+    //     cardImage.addEventListener('click', function() {
+    //         imagePopupImage.src = cardData.link; 
+    //         imagePopupImage.alt = cardData.name; 
+    //         imagePopupTitle.textContent = cardData.name; 
+    //         openModal(imagePopup); // Открываем поп-ап
+    //     });
 
-        console.log("Карточка создана:", cardElement);
+    //     console.log("Карточка создана:", cardElement);
 
-        // Возвращаем готовую карточку
-        return cardElement;
-    }
+    //     // Возвращаем готовую карточку
+    //     return cardElement;
+    // }
 
     // Получаем контейнер для карточек
     const placesList = document.querySelector('.places__list');
@@ -113,15 +113,15 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal(profilePopup);
     }
 
-    // Функция для заполнения карточки
-    function fillFormCard() {
-        // Оставим поля пустыми, чтобы пользователь мог вводить новые данные
-        cardName.value = ''; 
-        cardUrl.value = '';
+    // // Функция для заполнения карточки
+    // function fillFormCard() {
+    //     // Оставим поля пустыми, чтобы пользователь мог вводить новые данные
+    //     cardName.value = ''; 
+    //     cardUrl.value = '';
 
-        // Открытие попапа
-        openModal(cardPopup);
-    }
+    //     // Открытие попапа
+    //     openModal(cardPopup);
+    // }
 
     // ПОП-АП РЕДАКТИРОВАНИЯ ПРОФИЛЯ
     const editButtonProfile = document.querySelector('.profile__edit-button');
@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обработчик события отправки формы профиля
     profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
-    // ПОП-АП ДОБАВЛЕНИЕ КАРТОЧЕК
-    const editButtonCard = document.querySelector('.profile__add-button');
-    const closeButtonCard = cardPopup.querySelector('.popup__close');
+    // // ПОП-АП ДОБАВЛЕНИЕ КАРТОЧЕК
+    // const editButtonCard = document.querySelector('.profile__add-button');
+    // const closeButtonCard = cardPopup.querySelector('.popup__close');
 
     // Открытие поп-апа с заполнением формы
     editButtonCard.addEventListener('click', fillFormCard);
@@ -176,33 +176,48 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal(cardPopup);
     });
 
-    // Сохранение данных и закрытие поп-апа карточки
-    const cardFormElement = cardPopup.querySelector('.popup__form'); 
+//     // Сохранение данных и закрытие поп-апа карточки
+//     const cardFormElement = cardPopup.querySelector('.popup__form'); 
 
-    // Функция для обработки отправки формы карточки
-    function handleCardFormSubmit(evt) {
-        evt.preventDefault(); 
+//     // Функция для обработки отправки формы карточки
+//     function handleCardFormSubmit(evt) {
+//         evt.preventDefault(); 
 
-        // Получение значений полей cardName и cardUrl из свойства value
-        const n = cardName.value;
-        const l = cardUrl.value;
+//         // Получение значений полей cardName и cardUrl из свойства value
+//         const n = cardName.value;
+//         const l = cardUrl.value;
 
-        // Оформляем данные для подачи в функцию
-        const cardData = {
-            name: n,
-            link: l,
-        };
+//         // Оформляем данные для подачи в функцию
+//         const cardData = {
+//             name: n,
+//             link: l,
+//         };
 
-        // Создаем новую карточку
-        const card = createCard(cardData);
+//         // Создаем новую карточку
+//         const card = createCard(cardData);
         
-        // Добавляем карточку в начало контейнера
-        placesList.prepend(card); // Используем prepend для добавления в начало
+//         // Добавляем карточку в начало контейнера
+//         placesList.prepend(card); // Используем prepend для добавления в начало
 
-        // Закрываем попап после сохранения
-        closeModal(cardPopup);
+//         // Закрываем попап после сохранения
+//         closeModal(cardPopup);
+//     }
+
+//     // Обработчик события отправки формы карточки
+//     cardFormElement.addEventListener('submit', handleCardFormSubmit);
+// });
+
+// Создание объекта с настройками валидации
+    const validationSettings = {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__button',
+        inactiveButtonClass: 'popup__button_disabled',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_visible'
     }
 
-    // Обработчик события отправки формы карточки
-    cardFormElement.addEventListener('submit', handleCardFormSubmit);
+    // включение валидации вызовом enableValidation
+    // все настройки передаются при вызове
+    enableValidation(validationSettings); 
 });
