@@ -1,7 +1,7 @@
-import {createCard} from './card.js';
-import {openPopup, closePopup, closeOnOverlayClick, closeByEsc} from './modal.js';
-import {showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation} from './validate.js';
 
+import {createCard} from './components/card.js';
+import {openPopup, closePopup, closeOnOverlayClick, closeByEsc} from './components/modal.js';
+import {showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation} from './components/validate.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM полностью загружен и разобран");

@@ -1,0 +1,17 @@
+{
+  "name": "mesto-main",
+  "version": "1.0.0",
+  "description": "Минаева Анна, ИД22-1 Ссылка на репозиторий: https://github.com/prunuspadus/mesto.git",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
