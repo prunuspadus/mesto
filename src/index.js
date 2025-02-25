@@ -1,3 +1,8 @@
+import {createCard} from './card.js';
+import {openPopup, closePopup, closeOnOverlayClick, closeByEsc} from './modal.js';
+import {showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation} from './validate.js';
+
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM полностью загружен и разобран");
 
@@ -113,15 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal(profilePopup);
     }
 
-    // // Функция для заполнения карточки
-    // function fillFormCard() {
-    //     // Оставим поля пустыми, чтобы пользователь мог вводить новые данные
-    //     cardName.value = ''; 
-    //     cardUrl.value = '';
+    // Функция для заполнения карточки
+    function fillFormCard() {
+        // Оставим поля пустыми, чтобы пользователь мог вводить новые данные
+        cardName.value = ''; 
+        cardUrl.value = '';
 
-    //     // Открытие попапа
-    //     openModal(cardPopup);
-    // }
+        // Открытие попапа
+        openModal(cardPopup);
+    }
 
     // ПОП-АП РЕДАКТИРОВАНИЯ ПРОФИЛЯ
     const editButtonProfile = document.querySelector('.profile__edit-button');
@@ -164,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обработчик события отправки формы профиля
     profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
-    // // ПОП-АП ДОБАВЛЕНИЕ КАРТОЧЕК
-    // const editButtonCard = document.querySelector('.profile__add-button');
-    // const closeButtonCard = cardPopup.querySelector('.popup__close');
+    // ПОП-АП ДОБАВЛЕНИЕ КАРТОЧЕК
+    const editButtonCard = document.querySelector('.profile__add-button');
+    const closeButtonCard = cardPopup.querySelector('.popup__close');
 
     // Открытие поп-апа с заполнением формы
     editButtonCard.addEventListener('click', fillFormCard);
@@ -176,36 +181,36 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal(cardPopup);
     });
 
-//     // Сохранение данных и закрытие поп-апа карточки
-//     const cardFormElement = cardPopup.querySelector('.popup__form'); 
+    // Сохранение данных и закрытие поп-апа карточки
+    const cardFormElement = cardPopup.querySelector('.popup__form'); 
 
-//     // Функция для обработки отправки формы карточки
-//     function handleCardFormSubmit(evt) {
-//         evt.preventDefault(); 
+    // Функция для обработки отправки формы карточки
+    function handleCardFormSubmit(evt) {
+        evt.preventDefault(); 
 
-//         // Получение значений полей cardName и cardUrl из свойства value
-//         const n = cardName.value;
-//         const l = cardUrl.value;
+        // Получение значений полей cardName и cardUrl из свойства value
+        const n = cardName.value;
+        const l = cardUrl.value;
 
-//         // Оформляем данные для подачи в функцию
-//         const cardData = {
-//             name: n,
-//             link: l,
-//         };
+        // Оформляем данные для подачи в функцию
+        const cardData = {
+            name: n,
+            link: l,
+        };
 
-//         // Создаем новую карточку
-//         const card = createCard(cardData);
+        // Создаем новую карточку
+        const card = createCard(cardData);
         
-//         // Добавляем карточку в начало контейнера
-//         placesList.prepend(card); // Используем prepend для добавления в начало
+        // Добавляем карточку в начало контейнера
+        placesList.prepend(card); // Используем prepend для добавления в начало
 
-//         // Закрываем попап после сохранения
-//         closeModal(cardPopup);
-//     }
+        // Закрываем попап после сохранения
+        closeModal(cardPopup);
+    }
 
-//     // Обработчик события отправки формы карточки
-//     cardFormElement.addEventListener('submit', handleCardFormSubmit);
-// });
+    // Обработчик события отправки формы карточки
+    cardFormElement.addEventListener('submit', handleCardFormSubmit);
+});
 
 // Создание объекта с настройками валидации
     const validationSettings = {
@@ -220,4 +225,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // включение валидации вызовом enableValidation
     // все настройки передаются при вызове
     enableValidation(validationSettings); 
-});
