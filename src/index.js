@@ -1,4 +1,5 @@
-
+import './pages/index.css';
+import { initialCards } from './cards.js';
 import {createCard} from './components/card.js';
 import {openPopup, closePopup, closeOnOverlayClick, closeByEsc} from './components/modal.js';
 import {showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation} from './components/validate.js';
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButtonImage = imagePopup.querySelector('.popup__close');
 
     closeButtonImage.addEventListener('click', function() {
-        closeModal(imagePopup);
+        closePopup(imagePopup);
     });
 
     // Функция для заполнения профиля
@@ -115,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aboutInput.value = userAbout;
 
         // Открытие попапа
-        openModal(profilePopup);
+        openPopup(profilePopup);
     }
 
     // Функция для заполнения карточки
@@ -125,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardUrl.value = '';
 
         // Открытие попапа
-        openModal(cardPopup);
+        openPopup(cardPopup);
     }
 
     // ПОП-АП РЕДАКТИРОВАНИЯ ПРОФИЛЯ
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Закрытие поп-апа
     closeButtonProfile.addEventListener('click', function() {
-        closeModal(profilePopup);
+        closePopup(profilePopup);
     });
 
     // Сохранение данных и закрытие поп-апа профиля
@@ -163,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userJobElement.textContent = j; // Обновляем описание профиля
 
         // Закрываем попап после сохранения
-        closeModal(profilePopup);
+        closePopup(profilePopup);
     }
 
     // Обработчик события отправки формы профиля
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Закрытие поп-апа
     closeButtonCard.addEventListener('click', function() {
-        closeModal(cardPopup);
+        closePopup(cardPopup);
     });
 
     // Сохранение данных и закрытие поп-апа карточки
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         placesList.prepend(card); // Используем prepend для добавления в начало
 
         // Закрываем попап после сохранения
-        closeModal(cardPopup);
+        closePopup(cardPopup);
     }
 
     // Обработчик события отправки формы карточки
