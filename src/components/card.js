@@ -1,5 +1,5 @@
 // Функция для создания карточки
-function createCard(cardData) {
+export function createCard(cardData) {
     console.log("Создаем карточку для:", cardData);
     
     // Получаем шаблон
@@ -28,6 +28,18 @@ function createCard(cardData) {
         const card = deleteButton.closest('.card'); 
         card.remove(); 
     });
+    // Добавляем обработчик для открытия поп-апа с изображением
+    cardImage.addEventListener('click', function() {
+        imagePopupImage.src = cardData.link; 
+        imagePopupImage.alt = cardData.name; 
+        imagePopupTitle.textContent = cardData.name; 
+        openModal(imagePopup); // Открываем поп-ап
+    });
+
+    console.log("Карточка создана:", cardElement);
+
+    // Возвращаем готовую карточку
+    return cardElement;
 }
 
-export {createCard};
+// export {createCard};

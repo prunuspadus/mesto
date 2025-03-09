@@ -1,8 +1,8 @@
-import './pages/index.css';
-import { initialCards } from './cards.js';
-import {createCard} from './components/card.js';
-import {openPopup, closePopup, closeOnOverlayClick, closeByEsc} from './components/modal.js';
-import {showInputError, hideInputError, checkInputValidity, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation} from './components/validate.js';
+import '../pages/index.css';
+import { initialCards } from '../components/cards.js';
+import {createCard} from '../components/card.js';
+import {openPopup, closePopup} from '../components/modal.js';
+import {enableValidation} from '../components/validate.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM полностью загружен и разобран");
@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardName = cardPopup.querySelector('.popup__input_type_card-name');
     const cardUrl = cardPopup.querySelector('.popup__input_type_url');
 
+    // Обработчики событий для кнопок
+    // const editButton = document.querySelector('.profile__edit-button');
+    // const addButton = document.querySelector('.profile__add-button');
+    // const editPopup = document.querySelector('.popup_type_edit');
+    // const newCardPopup = document.querySelector('.popup_type_new-card');
 
     // Общие функции (закрытие/открытие окна)
     // function openModal(popup) {
