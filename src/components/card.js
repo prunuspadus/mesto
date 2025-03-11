@@ -1,3 +1,8 @@
+import {imagePopup, openPopup} from '../components/modal.js';
+
+const imagePopupImage = imagePopup.querySelector('.popup__image');
+const imagePopupTitle = imagePopup.querySelector('.popup__caption');
+
 // Функция для создания карточки
 export function createCard(cardData) {
     console.log("Создаем карточку для:", cardData);
@@ -12,17 +17,17 @@ export function createCard(cardData) {
     const cardTitle = cardElement.querySelector('.card__title');
     const likeButton = cardElement.querySelector('.card__like-button');
     const deleteButton = cardElement.querySelector('.card__delete-button');
-  
+
     // Заполняем карточку данными
     cardImage.src = cardData.link;
     cardImage.alt = cardData.name;
     cardTitle.textContent = cardData.name;
-  
+
     // Настраиваем кнопку лайка
     likeButton.addEventListener('click', function() {
         likeButton.classList.toggle('card__like-button_is-active'); 
     });
-  
+
     // Настраиваем кнопку удаления
     deleteButton.addEventListener('click', function() {
         const card = deleteButton.closest('.card'); 
@@ -33,7 +38,7 @@ export function createCard(cardData) {
         imagePopupImage.src = cardData.link; 
         imagePopupImage.alt = cardData.name; 
         imagePopupTitle.textContent = cardData.name; 
-        openModal(imagePopup); // Открываем поп-ап
+        openPopup(imagePopup); // Открываем поп-ап
     });
 
     console.log("Карточка создана:", cardElement);
@@ -41,5 +46,3 @@ export function createCard(cardData) {
     // Возвращаем готовую карточку
     return cardElement;
 }
-
-// export {createCard};

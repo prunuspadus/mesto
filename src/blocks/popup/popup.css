@@ -11,7 +11,7 @@
 @import url('./__input/_error/popup__input_error.css');
 @import url('./__error-text/popup__error-text.css');
 @import url('./__button/_inactive/popup__button_inactive.css');
-@import url('./__field/popup__field.css');
+/* @import url('./__field/popup__field.css'); */
 @import url('./__error-text/_active/popup__error-text_active.css');
 
 .popup {

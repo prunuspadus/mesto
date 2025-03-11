@@ -1,34 +1,9 @@
-//     // Общие функции (закрытие/открытие окна)
-//     function openPopup(popup) {
-//         popup.classList.add('popup_opened');
-//          // Добавляем слушатель на document
-//         document.addEventListener('keydown', closeByEsc);
-//     }
+import { resetFormErrors } from "./validate";
 
-//     function closePopup(popup) {
-//         if (popup) {
-//             popup.classList.remove('popup_opened');
-//             // Удаляем слушатель с document
-//             document.removeEventListener('keydown', closeByEsc);
-//         }
-//     }
+export const profilePopup = document.querySelector('.popup_type_edit');
+export const cardPopup = document.querySelector('.popup_type_new-card');
+export const imagePopup = document.querySelector('.popup_type_image');
 
-//     // Функция для закрытия поп-апа кликом на оверлей
-//     function closeOnOverlayClick(popup) {
-//         const overlay = popup.querySelector('.popup__overlay'); // Замените '.popup__overlay' на ваш селектор оверлея
-//         overlay.addEventListener('click', () => closePopup(popup));
-//     }
-
-//     // Функция для закрытия поп-апа клавищей Esc
-//     function closeByEsc(evt) {
-//         if (evt.key === "Escape"){
-//             const openedPopup = document.querySelector('.popup_opened');
-//             closePopup(openedPopup);      
-//         } 
-//     }
-
-
-// Общие функции (закрытие/открытие окна)
 function isKeyEscape(evt) {
     const popup = document.querySelector('.popup_is-opened');
     if (evt.key == 'Escape' && popup) {
@@ -42,22 +17,24 @@ function isOverlay(evt) {
     }
 }
 
-export function openPopup(popup) {
+function openPopup(popup, validationSettings) {      
     popup.classList.add('popup_is-opened');
     document.addEventListener('keydown', isKeyEscape);
     popup.addEventListener('click', isOverlay);
-    // Инициализация валидации при открытии поп-апа
-    if (popup === profilePopup) {
-        initValidation(profilePopup); // Передаем форму профиля
-    } else if (popup === cardPopup) {
-        initValidation(cardPopup); // Передаем форму карточки
+    if (validationSettings) {
+        const popupButton = popup.querySelector(validationSettings.submitButtonSelector);
+        const popupForm = popup.querySelector(validationSettings.formSelector);
+        resetFormErrors(popupForm, popupButton, validationSettings);
     }
 }
 
-export function closePopup(popup) {
+function closePopup(popup, validationSettings) {      
     popup.classList.remove('popup_is-opened');
+    const popupButton = popup.querySelector(validationSettings.submitButtonSelector);
+    const popupForm = popup.querySelector(validationSettings.formSelector);
     document.removeEventListener('keydown', isKeyEscape);
     popup.removeEventListener('click', isOverlay);
-
+    resetFormErrors(popupForm, popupButton, validationSettings);
 }
-// export {openPopup, closePopup};
+
+export {openPopup, closePopup}
