@@ -1,48 +1,59 @@
-import {imagePopup, openPopup} from '../components/modal.js';
+import { openPopup } from "./modal";
+import { deleteCard, addLike, removeLike } from "./api";
 
-const imagePopupImage = imagePopup.querySelector('.popup__image');
-const imagePopupTitle = imagePopup.querySelector('.popup__caption');
-
-// Функция для создания карточки
-export function createCard(cardData) {
-    console.log("Создаем карточку для:", cardData);
+function createCard(name, link, alt, imagePopup, imageInPopup, imageInPopupCaption, likesCount, cardOwnerId, userID, cardId) {
+    const cardTemplate = document.querySelector('#card-template').content;
+    const card = cardTemplate.querySelector('.card').cloneNode(true);
     
-    // Получаем шаблон
-    const cardTemplate = document.getElementById('card-template').content;
-    // Клонируем содержимое шаблона
-    const cardElement = cardTemplate.cloneNode(true);
+    if (cardOwnerId !== userID) {
+        card.querySelector('.card__delete-button').classList.add('card__delete-button_inactive');
+    }
+
+    card.querySelector('.card__image').src = link;
+    card.querySelector('.card__image').alt = alt;
+    card.querySelector('.card__title').textContent = name;
+    card.querySelector('.card__like-count').textContent = likesCount.length;
+
+    const cardLike = card.querySelector('.card__like-button');
+    const isLiked = (like) => like._id === userID;
+
+    if (Array.from(likesCount).some(isLiked)) {
+        cardLike.classList.add('card__like-button_is-active');
+    }
+
+    cardLike.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('card__like-button_is-active')) {
+            addLike(cardId)
+                .then((res) => {
+                    e.target.classList.add('card__like-button_is-active');
+                    card.querySelector('.card__like-count').textContent = res.likes.length;
+                })
+                .catch((err) => console.log(err));
+        } else {
+            removeLike(cardId)
+                .then((res) => {
+                    e.target.classList.remove('card__like-button_is-active');
+                    card.querySelector('.card__like-count').textContent = res.likes.length;
+                })
+                .catch((err) => console.log(err));
+        }
+    });
     
-    // Находим элементы карточки
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const likeButton = cardElement.querySelector('.card__like-button');
-    const deleteButton = cardElement.querySelector('.card__delete-button');
-
-    // Заполняем карточку данными
-    cardImage.src = cardData.link;
-    cardImage.alt = cardData.name;
-    cardTitle.textContent = cardData.name;
-
-    // Настраиваем кнопку лайка
-    likeButton.addEventListener('click', function() {
-        likeButton.classList.toggle('card__like-button_is-active'); 
+    const cardImage = card.querySelector('.card__image');
+    cardImage.addEventListener('click', (e) => {
+        openPopup(imagePopup, null);
+        imageInPopup.src = e.target.src;
+        imageInPopup.alt = e.target.alt;
+        imageInPopupCaption.textContent = name;
     });
 
-    // Настраиваем кнопку удаления
-    deleteButton.addEventListener('click', function() {
-        const card = deleteButton.closest('.card'); 
-        card.remove(); 
+    const cardDelete = card.querySelector('.card__delete-button');
+    cardDelete.addEventListener('click', (e) => {
+        e.target.closest('.card').remove();
+        deleteCard(cardId);
     });
-    // Добавляем обработчик для открытия поп-апа с изображением
-    cardImage.addEventListener('click', function() {
-        imagePopupImage.src = cardData.link; 
-        imagePopupImage.alt = cardData.name; 
-        imagePopupTitle.textContent = cardData.name; 
-        openPopup(imagePopup); // Открываем поп-ап
-    });
-
-    console.log("Карточка создана:", cardElement);
-
-    // Возвращаем готовую карточку
-    return cardElement;
+    
+    return card;
 }
+
+export {createCard}
